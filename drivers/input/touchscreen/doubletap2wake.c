@@ -200,6 +200,12 @@ static void dt2w_input_callback(struct work_struct *unused) {
 
 static void dt2w_input_event(struct input_handle *handle, unsigned int type,
 				unsigned int code, int value) {
+#ifdef CONFIG_TOUCHSCREEN_XIAOMI_DT2W
+	if (xiaomi_dt2w_enable)
+		dt2w_switch = DT2W_FS;
+	else
+		dt2w_switch = DT2W_OFF;
+#endif
 #if DT2W_DEBUG
 	pr_info("doubletap2wake: code: %s|%u, val: %i\n",
 		((code==ABS_MT_POSITION_X) ? "X" :
