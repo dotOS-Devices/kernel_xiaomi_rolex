@@ -203,8 +203,11 @@ void thaw_fingerprintd(void)
 	read_lock(&tasklist_lock);
 	for_each_process(p) {
 		if ((!memcmp(p->comm, "android.hardware.biometrics.fingerprint@2.1-service", 13)) ||
+			(!memcmp(p->comm,"android.hardware.biometrics.fingerprint@2.1-service.xiaomi_msm8937", 13)) ||
 			(!memcmp(p->comm,"android.hardware.biometrics.fingerprint@2.1-service.custom", 13)) ||
 			(!memcmp(p->comm,"android.hardware.biometrics.fingerprint@2.1-service.land", 13)) ||
+			(!memcmp(p->comm,"land_gx_fpd", 13)) ||
+			(!memcmp(p->comm,"santoni_gx_fpd", 13)) ||
 			(!memcmp(p->comm,"gx_fpd", 13))) {
 			__thaw_task(p);
 			break;
